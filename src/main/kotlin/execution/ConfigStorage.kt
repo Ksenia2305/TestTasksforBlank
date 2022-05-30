@@ -4,7 +4,7 @@ import execution.LaunchEnvironment.*
 
 class ConfigStorage(
     val host: String,
-    val schema: String = "http",
+    val schema: String = "https",
     val port: String = "443",
 
 

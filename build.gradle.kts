@@ -46,9 +46,8 @@ dependencies {
     implementation("io.kotest:kotest-assertions-json:$kotestVersion")
     implementation("io.kotest:kotest-common-jvm:$kotestVersion")
     testImplementation("io.qameta.allure:allure-junit5:$allureVersion")
-    //implementation("io.qameta.allure:allure-java-commons:$allureVersion")
+    implementation("io.qameta.allure:allure-java-commons:$allureVersion")
     implementation("io.github.microutils:kotlin-logging:1.12.5")
-    implementation("com.github.tomakehurst:wiremock-jre8:$tomakehurstVersion")
     implementation("com.github.mifmif:generex:$generaxVersion")
     implementation("com.nfeld.jsonpathkt:jsonpathkt:$jsonPathVersion")
 }

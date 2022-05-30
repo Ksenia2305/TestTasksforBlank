@@ -18,8 +18,18 @@ fun post(
     parameters: List<Pair<String, String>>? = null
 ) = sendRequest<String>(RequestType.POST, path, requestBody = request, headers = headers, parameters = parameters)
 
+fun patch(
+    path: String,
+    request: Any?,
+    headers: Map<String, Any> = mapOf("Content-Type" to "application/json", "X-HTTP-Method-Override" to "PATCH"),
+) = sendRequest<String>(RequestType.PATCH, path, requestBody = request, headers = headers)
+
 inline fun <reified T> get(path: String, headers: Map<String, Any> = emptyMap()): HttpResponse<T> =
     sendRequest(RequestType.GET, path, headers = headers)
+
+fun delete(path: String, headers: Map<String, Any> = emptyMap()) =
+    sendRequest<String>(RequestType.DELETE, path, headers = headers)
+
 
 inline fun <reified T> sendRequest(
     requestType: RequestType,
@@ -62,6 +72,8 @@ inline fun <reified T> sendRequest(
         }
         RequestType.PUT -> Fuel.put(url).body(requestBody as ByteArray).allowRedirects(allowRedirects)
         RequestType.OPTIONS -> Fuel.request(Method.OPTIONS, url).allowRedirects(allowRedirects)
+        RequestType.DELETE -> Fuel.request(Method.DELETE, url).allowRedirects(allowRedirects)
+        RequestType.PATCH -> Fuel.patch(url).body(requestBody!!.toJson())
     }
 
     val (_, response, _) = request.header(headers).timeoutRead(50000).response()
@@ -92,7 +104,7 @@ fun extractCookie(response: Response): String =
         .substringAfter("[").substringBefore("]").ifEmpty { "" }
 
 enum class RequestType {
-    GET, POST, PUT, OPTIONS
+    GET, POST, PUT, OPTIONS, DELETE, PATCH
 }
 
 fun url(path: String) = when (path.startsWith("https")) {

@@ -4,3 +4,4 @@ const val ANY_UUID = "regexp: [0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0
 const val ANY_DIGITS = "regexp: [\\d]+"
 const val NOT_EMPTY = "regexp: ^(?!\\s*\$).+"
 const val ANY_STRING = "regexp: .*"
+val TIMESTAMP = "regexp: ${currentDate()} \\d{2}:\\d{2}:\\d{2}"
